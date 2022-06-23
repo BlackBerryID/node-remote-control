@@ -1,16 +1,18 @@
 # dependencies
 /node_modules
+/.pnp
+.pnp.js
 
-# System Files
+# testing
+/coverage
+
+# production
+/build
+/dist
+
+# misc
 .DS_Store
-Thumbs.db
-[Dd]esktop.ini
-
-# Links
-*.lnk
-.idea/
-*.PEM
-.vscode/
-
-# Logs
-npm-debug.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
