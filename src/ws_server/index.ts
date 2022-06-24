@@ -2,6 +2,7 @@ import robot from 'robotjs';
 import { WebSocketServer } from 'ws';
 import { mouseControlHandler } from './modules/mouse-control';
 import { drawControlHandler } from './modules/draw-control';
+import { screenshot } from './modules/screenshot';
 import { errorHandler } from './modules/error-handler';
 
 const wss = new WebSocketServer({ port: 8080 }, () => {
@@ -22,6 +23,9 @@ export const runWSS = () => {
             break;
           case 'draw':
             drawControlHandler({ ws, mousePos, command, value });
+            break;
+          case 'prnt':
+            screenshot();
             break;
           default:
             break;
