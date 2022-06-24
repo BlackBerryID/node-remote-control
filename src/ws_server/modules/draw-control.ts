@@ -15,34 +15,65 @@ export const drawControlHandler = ({ ws, mousePos, command, value }: FunctionPro
       robot.mouseToggle('up');
       ws.send('draw_circle');
       break;
+
     case 'draw_rectangle':
       const [width, height] = value.map((item) => Number(item));
-      const tempMousePos = mousePos;
+      const rectangleMousePos = mousePos;
       robot.mouseToggle('down');
       for (let i = 0; i <= width; i += 2) {
-        const x = tempMousePos.x + i;
-        const y = tempMousePos.y;
+        const x = rectangleMousePos.x + i;
+        const y = rectangleMousePos.y;
         robot.dragMouse(x, y);
       }
-      tempMousePos.x += width;
+      rectangleMousePos.x += width;
       for (let i = 0; i <= height; i += 2) {
-        const x = tempMousePos.x;
-        const y = tempMousePos.y + i;
+        const x = rectangleMousePos.x;
+        const y = rectangleMousePos.y + i;
         robot.dragMouse(x, y);
       }
-      tempMousePos.y += height;
+      rectangleMousePos.y += height;
       for (let i = 0; i <= width; i += 2) {
-        const x = tempMousePos.x - i;
-        const y = tempMousePos.y;
+        const x = rectangleMousePos.x - i;
+        const y = rectangleMousePos.y;
         robot.dragMouse(x, y);
       }
-      tempMousePos.x -= width;
+      rectangleMousePos.x -= width;
       for (let i = 0; i <= height; i += 2) {
-        const x = tempMousePos.x;
-        const y = tempMousePos.y - i;
+        const x = rectangleMousePos.x;
+        const y = rectangleMousePos.y - i;
         robot.dragMouse(x, y);
       }
+      robot.mouseToggle('up');
+      ws.send('draw_rectangle');
+      break;
 
+    case 'draw_square':
+      const sideLength = +value;
+      const squareMousePos = mousePos;
+      robot.mouseToggle('down');
+      for (let i = 0; i <= sideLength; i += 2) {
+        const x = squareMousePos.x + i;
+        const y = squareMousePos.y;
+        robot.dragMouse(x, y);
+      }
+      squareMousePos.x += sideLength;
+      for (let i = 0; i <= sideLength; i += 2) {
+        const x = squareMousePos.x;
+        const y = squareMousePos.y + i;
+        robot.dragMouse(x, y);
+      }
+      squareMousePos.y += sideLength;
+      for (let i = 0; i <= sideLength; i += 2) {
+        const x = squareMousePos.x - i;
+        const y = squareMousePos.y;
+        robot.dragMouse(x, y);
+      }
+      squareMousePos.x -= sideLength;
+      for (let i = 0; i <= sideLength; i += 2) {
+        const x = squareMousePos.x;
+        const y = squareMousePos.y - i;
+        robot.dragMouse(x, y);
+      }
       robot.mouseToggle('up');
       ws.send('draw_rectangle');
       break;
