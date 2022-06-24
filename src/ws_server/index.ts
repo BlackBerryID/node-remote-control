@@ -12,7 +12,7 @@ export const runWSS = () => {
     console.log('connection');
     ws.on('message', (data) => {
       const mousePos = robot.getMousePos();
-      const [command, value] = data.toString().split(' ');
+      const [command, ...value] = data.toString().split(' ');
       const [mainCommand] = command.split('_');
       switch (mainCommand) {
         case 'mouse':

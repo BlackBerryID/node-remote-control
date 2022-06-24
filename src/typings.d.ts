@@ -7,5 +7,5 @@ export type FunctionProps = {
     y: number;
   };
   command: string;
-  value: string;
+  value: string[];
 };
