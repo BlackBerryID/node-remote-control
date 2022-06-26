@@ -25,7 +25,7 @@ export const runWSS = () => {
             drawControlHandler({ ws, mousePos, command, value });
             break;
           case 'prnt':
-            screenshot();
+            screenshot({ ws, mousePos });
             break;
           default:
             break;
