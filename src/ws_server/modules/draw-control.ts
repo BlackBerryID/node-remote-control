@@ -1,7 +1,7 @@
 import robot from 'robotjs';
 import type { FunctionProps } from '../../typings';
 
-export const drawControlHandler = ({ ws, mousePos, command, value }: FunctionProps) => {
+export const drawControlHandler = ({ wsStream, mousePos, command, value }: FunctionProps) => {
   switch (command) {
     case 'draw_circle':
       const radius = +value;
@@ -13,7 +13,7 @@ export const drawControlHandler = ({ ws, mousePos, command, value }: FunctionPro
         robot.dragMouse(x, y);
       }
       robot.mouseToggle('up');
-      ws.send('draw_circle');
+      wsStream.write('draw_circle');
       break;
 
     case 'draw_rectangle':
@@ -44,7 +44,7 @@ export const drawControlHandler = ({ ws, mousePos, command, value }: FunctionPro
         robot.dragMouse(x, y);
       }
       robot.mouseToggle('up');
-      ws.send('draw_rectangle');
+      wsStream.write('draw_rectangle');
       break;
 
     case 'draw_square':
@@ -75,7 +75,7 @@ export const drawControlHandler = ({ ws, mousePos, command, value }: FunctionPro
         robot.dragMouse(x, y);
       }
       robot.mouseToggle('up');
-      ws.send('draw_rectangle');
+      wsStream.write('draw_rectangle');
       break;
 
     default:

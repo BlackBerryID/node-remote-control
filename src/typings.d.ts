@@ -6,6 +6,7 @@ export type ScreenshotProps = {
     x: number;
     y: number;
   };
+  wsStream: internal.Duplex;
 };
 
 export type FunctionProps = {
@@ -16,4 +17,5 @@ export type FunctionProps = {
   };
   command: string;
   value: string[];
+  wsStream: internal.Duplex;
 };
