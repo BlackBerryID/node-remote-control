@@ -1,17 +1,17 @@
-import WebSocket, { WebSocketServer, createWebSocketStream } from "ws";
-import { db } from "../db.js";
+import WebSocket, { WebSocketServer, createWebSocketStream } from 'ws';
+import { db } from '../db.js';
 
 const wss = new WebSocketServer({
   port: 3000,
 });
 
-const broadcastMessage = (message) => {};
+// const broadcastMessage = (message) => {};
 
-wss.on("connection", function connection(ws) {
-  ws.on("error", console.error);
+wss.on('connection', function connection(ws) {
+  ws.on('error', console.error);
 
-  ws.on("message", function (message) {
-    const parsedMessage = JSON.parse(message.toString("utf-8"));
+  ws.on('message', function (message) {
+    const parsedMessage = JSON.parse(message.toString('utf-8'));
     const type = parsedMessage.type;
     let response;
 
@@ -25,7 +25,7 @@ wss.on("connection", function connection(ws) {
     //   default:
     //     break;
     // }
-    console.log("parsedMessage: ", parsedMessage);
+    console.log('parsedMessage: ', parsedMessage);
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
         client.send(message, { binary: false });
