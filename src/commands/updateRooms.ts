@@ -26,12 +26,12 @@ export const handleUpdateRooms = (type: string, parsedMessage?: any, userId?: st
 
   let responseCreateGame;
 
-  const roomIdWhereToStartGame = db.rooms.find((room) => room.roomUsers.length >= 2);
+  const roomWhereToStartGame = db.rooms.find((room) => room.roomUsers.length >= 2);
 
-  if (roomIdWhereToStartGame) {
+  if (roomWhereToStartGame) {
     const game = {
       gameId: randomUUID(),
-      playersIds: roomIdWhereToStartGame?.roomUsers.map((user) => user.index) as string[],
+      playersIds: roomWhereToStartGame?.roomUsers.map((user) => user.index) as string[],
     };
     db.games.push(game);
     responseCreateGame = {
@@ -42,6 +42,8 @@ export const handleUpdateRooms = (type: string, parsedMessage?: any, userId?: st
       }),
       id: 0,
     };
+
+    db.rooms = db.rooms.filter((room) => room.roomId !== roomWhereToStartGame.roomId);
   }
 
   const responseUpdateRooms = {
