@@ -15,7 +15,7 @@ const validateUserData = (name: string, password: string) => {
   }
 };
 
-export const handleReg = (parsedMessage: any) => {
+export const handleReg = (parsedMessage: any, wsId: string) => {
   const { type, data, id } = parsedMessage;
   const { name, password } = JSON.parse(data);
   let userData;
@@ -27,7 +27,7 @@ export const handleReg = (parsedMessage: any) => {
     userData = {
       name,
       password,
-      index: randomUUID(),
+      index: wsId,
     };
 
     db.users.push(userData);
